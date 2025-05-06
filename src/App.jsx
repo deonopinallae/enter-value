@@ -33,7 +33,6 @@ export default function App() {
 		setList([...list])
 		localStorage.setItem('listArr', JSON.stringify([...list]))
 	}
-	console.log(list)
 
 	
 	return (
