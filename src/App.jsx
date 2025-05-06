@@ -29,10 +29,11 @@ export default function App() {
 	localStorage.setItem('listArr', JSON.stringify([...list]))
 
 	const deleteListItem = (elId) => {
-		list.splice(list.findIndex(el => String(el.id) === elId), 1)
+		list.splice(list.findIndex(el => el.id === elId), 1)
 		setList([...list])
 		localStorage.setItem('listArr', JSON.stringify([...list]))
 	}
+	console.log(list)
 
 	
 	return (
@@ -50,15 +51,15 @@ export default function App() {
 				<button
 					onClick={onAddButtonClick}
 					className={styles.button}
-					disabled={value.length < 3 ? true : false}
+					disabled={!value.length}
 				>
 					Добавить в список
 				</button>
 			</div>
 			<div className={styles['list-container']}>
 				<h2 className={styles['list-heading']}>Список:</h2>
-				<p className={styles['no-margin-text']} hidden={list.length === 0?false:true}>Нет добавленных элементов</p>
-				<ul className={styles.list} hidden={list.length === 0?true:false}>
+				<p className={styles['no-margin-text']} hidden={list.length === 0 ? false : true}>Нет добавленных элементов</p>
+				<ul className={styles.list} hidden={list.length === 0? true : false}>
 					{list.map(el => <li id={el.id} key={el.id} className={styles['list-item']}>{el.value} <span>{el.addDate}</span>
 					<button onClick={() => deleteListItem(el.id)}>удалить</button>
 					</li>)}
